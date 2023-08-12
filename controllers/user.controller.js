@@ -69,14 +69,14 @@ const loginUser = async (req, res) => {
 
 const profile = async (req, res) => {
   try {
-    if (!req.body.userId) {
-      throw {
-        statusObj: BAD_REQUEST,
-        type: "ValidationError",
-        name: "Missing fields",
-      };
-    }
-    const user = await userService.profileService(req.body.userId);
+    // if (!req.body.userId) {
+    //   throw {
+    //     statusObj: BAD_REQUEST,
+    //     type: "ValidationError",
+    //     name: "Missing fields",
+    //   };
+    // }
+    // const user = await userService.profileService(req.body.userId);
     // if (user.length == 0) {
     //   const err = {
     //     statusObj: NOT_FOUND,
@@ -86,7 +86,7 @@ const profile = async (req, res) => {
     //   throw err;
     // }
 
-    messageCustom(res, OK, "User profile", user);
+    messageCustom(res, OK, "User profile", { user: req.user });
   } catch (error) {
     handleErrors(req, res, error);
   }
