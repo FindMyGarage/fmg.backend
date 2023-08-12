@@ -58,9 +58,12 @@ const findCloseGarages = async (params) => {
   // step 3: return the first limit garages
 
   // console.log(params);
+  limit = (params.limit)?params.limit:10;
+  radius = (params.radius)?params.radius:5;
 
   const garages = await garage.aggregate([
     {
+      // distance should be less than params.radius
       $addFields: {
         distance: {
           $sqrt: {
@@ -69,28 +72,35 @@ const findCloseGarages = async (params) => {
               { $pow: [{ $subtract: ["$locationY", params.longitude] }, 2] }
             ]
           }
+        }        
+      }
+    },
+    {
+      $match: {
+        distance: {
+          $lte: radius / 100
         }
       }
     },
     // inside slots we need to check if there is any slot with status available 
     // and count if > 0
-    {
-      $match: {
-        slots: {
-          $elemMatch: {
-            status: "available"
-          },
-          // $gt: 0
-        },
-      }
-    },
+    // {
+    //   $match: {
+    //     slots: {
+    //       $elemMatch: {
+    //         status: "available"
+    //       },
+    //       // $gt: 0
+    //     },
+    //   }
+    // },
     {
       $sort: {
         distance: 1
       }
     },
     {
-      $limit: (params.limit)?params.limit:10
+      $limit: limit
     }
   ])
 
