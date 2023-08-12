@@ -18,6 +18,8 @@ const newGarage = async (req, res) => {
   }
 };
 
+
+
 const addCamera = async (req, res) => {
   try {
     const camera = await garageService.addCamera(req.body);
@@ -46,8 +48,31 @@ const getAllGarages = async (req, res) => {
   }
 };
 
+const findCloseGarages = async (req, res) => {
+  try{
+
+    if(!req.body.latitude || !req.body.longitude){
+      throw {
+        status: BAD_REQUEST,
+        message: "Latitude and longitude not specified"        
+      }
+    }
+    const garages = await garageService.findCloseGarages(req.body);
+
+    const return_object = {
+      garages,
+    };
+
+    messageCustom(res, OK, "Close garages", return_object);
+  }
+  catch(error){
+    handleErrors(req, res, error);
+  }
+};
+
 module.exports = {
   newGarage,
   getAllGarages,
   addCamera,
+  findCloseGarages
 };
