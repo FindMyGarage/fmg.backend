@@ -1,0 +1,7 @@
+::ffff:103.2.135.35 - - [12/Aug/2023:16:10:02 +0000] "POST /bookings/accept HTTP/1.1" 400 129 "-" "PostmanRuntime/7.32.3"
+::ffff:103.2.135.35 - - [12/Aug/2023:16:11:40 +0000] "POST /bookings/accept HTTP/1.1" 400 129 "-" "PostmanRuntime/7.32.3"
+::ffff:103.2.135.35 - - [12/Aug/2023:16:13:38 +0000] "POST /bookings/accept HTTP/1.1" 400 141 "-" "PostmanRuntime/7.32.3"
+::ffff:103.2.135.35 - - [12/Aug/2023:16:13:57 +0000] "POST /bookings/accept HTTP/1.1" 200 449 "-" "PostmanRuntime/7.32.3"
+::ffff:103.2.135.35 - - [12/Aug/2023:16:14:14 +0000] "POST /bookings/accept HTTP/1.1" 200 515 "-" "PostmanRuntime/7.32.3"
+::ffff:103.2.135.35 - - [12/Aug/2023:16:25:22 +0000] "POST /bookings/accept HTTP/1.1" 200 449 "-" "PostmanRuntime/7.32.3"
+::ffff:103.2.135.35 - - [12/Aug/2023:16:25:55 +0000] "POST /bookings/accept HTTP/1.1" 200 515 "-" "PostmanRuntime/7.32.3"

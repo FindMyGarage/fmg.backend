@@ -28,7 +28,7 @@ const authenticate = () => {
           authorizationHeaderArray[1],
           String(process.env.JWT_SECRET),
         );
-        let user = await getUser(decoded.username);
+        let user = await getUser({ _id: decoded.user_id });
         if (!user) {
           throw new Error("User not found");
         }

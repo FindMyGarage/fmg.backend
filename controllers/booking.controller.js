@@ -164,8 +164,8 @@ const acceptBooking = async (req, res) => {
 };
 
 const completePayment = async (req, res) => {
-  try{
-    if(!req.body.bookingId){
+  try {
+    if (!req.body.bookingId) {
       throw {
         statusObj: BAD_REQUEST,
         type: "ValidationError",
@@ -177,7 +177,7 @@ const completePayment = async (req, res) => {
       status: "checkedout",
     });
 
-    if(booking.length == 0){
+    if (booking.length == 0) {
       throw {
         statusObj: BAD_REQUEST,
         type: "ValidationError",
@@ -187,18 +187,19 @@ const completePayment = async (req, res) => {
 
     booking = booking[0];
 
-    const newBooking = await bookingService.updateBooking(booking._id, { status: "completed" });
+    const newBooking = await bookingService.updateBooking(booking._id, {
+      status: "completed",
+    });
 
     const return_object = {
       booking: newBooking,
     };
 
     messageCustom(res, OK, "Booking updated successfully", return_object);
-  }
-  catch(err){
+  } catch (err) {
     handleErrors(req, res, err);
   }
-}
+};
 
 module.exports = {
   acceptBooking,

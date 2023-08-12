@@ -55,6 +55,7 @@ const loginUser = async (req, res) => {
       String(process.env.JWT_SECRET),
       jwt_headers,
     );
+    // console.log(jwt.decode());
 
     const return_object = {
       user: user,
