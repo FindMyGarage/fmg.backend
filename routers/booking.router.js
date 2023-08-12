@@ -5,4 +5,6 @@ const router = Router();
 
 router.route("/accept").post(bookingController.acceptBooking);
 
+router.route("/pay").post(bookingController.completePayment);
+
 module.exports = router;

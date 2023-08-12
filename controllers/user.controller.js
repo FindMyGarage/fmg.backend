@@ -85,8 +85,9 @@ const profile = async (req, res) => {
     //   };
     //   throw err;
     // }
+    const user = await userService.profileService(req.user._id);
 
-    messageCustom(res, OK, "User profile", { user: req.user });
+    messageCustom(res, OK, "User profile", { user });
   } catch (error) {
     handleErrors(req, res, error);
   }

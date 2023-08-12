@@ -136,7 +136,7 @@ const acceptBooking = async (req, res) => {
 
       // update booking
       booking = booking[0];
-      booking.status = "completed";
+      booking.status = "checkedout";
       booking.endTime = new Date();
       booking.amount =
         ((booking.endTime - booking.startTime) * booking.chargePerHour) /
@@ -163,6 +163,44 @@ const acceptBooking = async (req, res) => {
   }
 };
 
+const completePayment = async (req, res) => {
+  try{
+    if(!req.body.bookingId){
+      throw {
+        statusObj: BAD_REQUEST,
+        type: "ValidationError",
+        name: "Missing fields",
+      };
+    }
+    let booking = await bookingService.findBooking({
+      _id: req.body.bookingId,
+      status: "checkedout",
+    });
+
+    if(booking.length == 0){
+      throw {
+        statusObj: BAD_REQUEST,
+        type: "ValidationError",
+        name: "No booking found",
+      };
+    }
+
+    booking = booking[0];
+
+    const newBooking = await bookingService.updateBooking(booking._id, { status: "completed" });
+
+    const return_object = {
+      booking: newBooking,
+    };
+
+    messageCustom(res, OK, "Booking updated successfully", return_object);
+  }
+  catch(err){
+    handleErrors(req, res, err);
+  }
+}
+
 module.exports = {
   acceptBooking,
+  completePayment,
 };

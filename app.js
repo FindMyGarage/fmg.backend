@@ -5,10 +5,12 @@ const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose");
 const router = require("./router");
-
+const http = require('http');
 const dotenv = require("dotenv");
 
 dotenv.config();
+
+
 
 const uri = String(process.env.MONGO_URI);
 const port = Number(process.env.PORT);
@@ -32,6 +34,7 @@ mongoose.connection.once("open", () =>
 );
 
 const app = express();
+const server = http.createServer(app);
 
 app.use(cors());
 app.use(express.json());
@@ -139,7 +142,9 @@ let logStream = fs.createWriteStream(path.join(__dirname, "file.log"), {
 app.use(morgan("combined", { stream: logStream }));
 app.use(morgan("combined"));
 
+
+
 app.listen(port, () =>
-  console.log(`Parkify Server running at http://localhost:${port}`),
+  console.log(`FindMyGarage Server running at http://localhost:${port}`),
 );
 // appSocket.listen(socket_port, () => console.log(`Parkify Socket server running at http://localhost:${socket_port}`));

@@ -23,7 +23,7 @@ const bookingSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["inbooking", "cancelled", "completed"],
+      enum: ["inbooking", "cancelled", "checkedout", "completed"],
       required: true,
     },
     startTime: {
