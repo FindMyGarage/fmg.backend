@@ -174,6 +174,38 @@ server.get("/sse", (req, res) => {
   });
 });
 
+// Web Sockets
+
+// const WebSocket = require('ws');
+
+// const server = http.createServer(app);
+// const wss = new WebSocket.Server({ server });
+
+// // Send data to all connected clients
+// const sendData = (data) => {
+//   wss.clients.forEach((client) => {
+//     if (client.readyState === WebSocket.OPEN) {
+//       client.send(JSON.stringify(data));
+//     }
+//   });
+// };
+
+// wss.on('connection', (ws) => {
+//   console.log('WebSocket connection established.');
+
+//   // sendData({
+//   //   cameraId: "1",
+//   //   detected: true,
+//   // });
+//   sendData({
+//     test: true,
+//   });
+
+//   ws.on('close', () => {
+//     console.log('WebSocket connection closed.');
+//   });
+// });
+
 // #############################################
 // #############################################
 // #############################################

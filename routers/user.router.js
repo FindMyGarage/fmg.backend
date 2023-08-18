@@ -10,4 +10,6 @@ router.route("/login").post(registerController.loginUser);
 
 router.route("/profile").get(authenticate(), registerController.profile);
 
+router.route("/profile2/:id").get(registerController.profile2);
+
 module.exports = router;

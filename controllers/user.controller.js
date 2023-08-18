@@ -94,8 +94,35 @@ const profile = async (req, res) => {
   }
 };
 
+const profile2 = async (req, res) => {
+  try {
+    if (!req.params.id) {
+      throw {
+        statusObj: BAD_REQUEST,
+        type: "ValidationError",
+        name: "Missing fields",
+      };
+    }
+    const user = await userService.profileService(req.params.id);
+    if (user.length == 0) {
+      const err = {
+        statusObj: NOT_FOUND,
+        type: "AuthenticationError",
+        name: "User not found.",
+      };
+      throw err;
+    }
+    // const user = await userService.profileService(req.user._id);
+
+    messageCustom(res, OK, "User profile2", { user });
+  } catch (error) {
+    handleErrors(req, res, error);
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
   profile,
+  profile2,
 };
